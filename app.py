@@ -1,9 +1,10 @@
-from flask import Flask
+from flask import Flask,send_from_direktoryimport os
 
 app = Flask(__name__)
 
 # استايل "السيادة التقنية" - هندسة تفوق التوقعات
 COMMON_STYLE = """
+<link rel="manifest" href="/manifest.json">
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Orbitron:wght@400;900&family=Lexend:wght@300;600&display=swap');
     @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
@@ -358,6 +359,10 @@ def contact():
     </body>
     </html>
     """
+@app.route('/manifest.json')
+def serve_manifest():
+    return send_from_directory(os.getcwd(), 'manifest.json')
 
 if __name__ == '__main__':
     app.run(debug=True)
+    
